@@ -1,0 +1,54 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://exemplo.com/wsdlservidor/assets"
+	targetNamespace="http://exemplo.com/wsdlservidor/assets"
+	elementFormDefault="qualified">
+
+	<!-- xmlns:tns => Essa propriedade é importante e tem que ser o mesmo nome 
+		da aplicação do pacote, porque é onde servidor vai tar funcionando, como 
+		no pacote de referente: com.examplo.wsdlservidor => então no "xmlns:tns" 
+		ficaria igual como acima mostra.
+		E no "~/assets" é onde vai criar o pacote contendo as classes e outras configurações
+		para api de soap. -->
+
+<!-- Esse método do servidor vai tar esperando um request de um cliente informando um nome -->
+	<xs:element name="getPaisRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="nome" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+<!-- Então vai dar uma resposta de acordo informado no request de paises
+vai retornar um elemento pais do typo pais complexo. -->
+	<xs:element name="getPaisResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="pais" type="tns:pais" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+<!-- Então aqui é criado o tipo do elemento pais e ele vai conter alguns atributos
+alem de possuir um atributo moeda que é também tipo complexo -->
+	<xs:complexType name="pais">
+		<xs:sequence>
+			<xs:element name="nome" type="xs:string" />
+			<xs:element name="populacao" type="xs:int" />
+			<xs:element name="capital" type="xs:string" />
+			<xs:element name="moeda" type="tns:moeda" />
+		</xs:sequence>
+	</xs:complexType>
+
+<!--  Aqui ele vai ter um Enum de três tipos, apesar que é simpletype
+diferente do complextype porque eele não possui vários elementos  e sim como uma definição
+unica como exemplo um select para escolher. -->
+	<xs:simpleType name="moeda">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GBP" />
+			<xs:enumeration value="EUR" />
+			<xs:enumeration value="BRL" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

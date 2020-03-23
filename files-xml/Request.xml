@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  xmlns="http://webservices.soap.com"  namespace unico para xml -->
+<GetCustomerDetailRequest 
+xsi:schemaLocation="http://webservices.soap.com customer-information.xsd"
+xmlns="http://webservices.soap.com"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+	<id>123</id>
+</GetCustomerDetailRequest>

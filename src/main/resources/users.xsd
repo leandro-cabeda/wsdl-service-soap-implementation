@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- xmlns="http://webservices.soap.com/users" namespace unico para xml e no xsd 
+	deve seguir também mesma url nos dois atributos embaixo -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://wsservice.com/users"
+	xmlns:tns="http://wsservice.com/users" elementFormDefault="qualified">
+
+	<!-- Definição para xml request -->
+	<xs:element name="GetUsersRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- Definição para xml response buscar apenas um -->
+	<xs:element name="GetUsersResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="User" type="tns:Users" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- Definição para xml request todos -->
+	<xs:element name="GetAllUsersRequest">
+		<xs:complexType></xs:complexType>
+	</xs:element>
+	
+	<!-- Definição para xml response buscar todos 
+	maxOccurs='unbounded' => retornar ilimitado de dados que tiver-->
+	<xs:element name="GetAllUsersResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="User" type="tns:Users" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- Definição para xml request delete -->
+	<xs:element name="DeleteUsersRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- Definição para xml response delete -->
+	<xs:element name="DeleteUsersResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="tns:Status" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- Definição para xml request save or update -->
+	<xs:element name="SaveOrUpdateUsersRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="User" type="tns:Users" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- Definição para xml response save or update -->
+	<xs:element name="SaveOrUpdateUsersResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="tns:Status" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!--  Definição Status para xml response delete and save or update -->
+	<xs:simpleType name="Status">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Sucesso" />
+			<xs:enumeration value="Erro" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+
+	<!-- Elemento separado para ficar disponivel para qualquer um contendo
+	apenas a tag começando com complexType -->
+	<xs:complexType name="Users">
+		<xs:sequence>
+			<xs:element name="id" type="xs:int" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="phone" type="xs:string" />
+			<xs:element name="email" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

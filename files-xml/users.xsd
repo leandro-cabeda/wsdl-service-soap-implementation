@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- xmlns="http://webservices.soap.com" namespace unico para xml e no xsd 
+	deve seguir também mesma url nos dois atributos embaixo -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://webservices.soap.com"
+	xmlns:tns="http://webservices.soap.com" elementFormDefault="qualified">
+
+	<!-- Definição para xml request -->
+	<xs:element name="GetCustomerDetailRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:integer" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- Definição para xml response buscar apenas um -->
+	<xs:element name="GetCustomerDetailResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CustomerDetail" type="tns:CustomerDetail" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Definição para xml response buscar todos-->
+	<xs:element name="GetAllCustomerResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CustomerDetail" type="tns:CustomerDetail" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Elemento separado para ficar disponivel para qualquer um contendo
+	apenas a tag começando com complexType -->
+	<xs:complexType name="CustomerDetail">
+		<xs:sequence>
+			<xs:element name="id" type="xs:integer" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="phone" type="xs:string" />
+			<xs:element name="email" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
